@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-    "name": "Seedfinder",
-=======
     "name": "Home Assistant Seedfinder",
->>>>>>> 20ef10369a6658372551f99584af4cec6c5ced1f
     "render_readme": true
 }
 
