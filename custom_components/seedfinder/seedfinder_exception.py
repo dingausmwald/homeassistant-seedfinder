@@ -1,2 +1,0 @@
-class SeedfinderException(Exception):
-    pass
