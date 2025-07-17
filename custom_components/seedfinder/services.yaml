@@ -1,0 +1,95 @@
+<<<<<<< HEAD
+search:
+  name: Search
+  description: Searches Seedfinder for a plant
+  fields:
+    alias:
+      name: Search for
+      description: The string to search for
+      example: Capsicum
+      required: true
+      selector:
+        text:
+
+get:
+  name: Get
+  description: Fetches data for a specific strain from a specific breeder
+  fields:
+    species:
+      name: Strain Name
+      description: The name of the strain/species
+      example: white-widow
+      required: true
+      selector:
+        text:
+    breeder:
+      name: Breeder Name
+      description: The name of the breeder
+      example: greenhouse-seed-co
+      required: true
+      selector:
+        text:
+
+clean_cache:
+  name: Clean Cache
+  description: Clean up the cached entries from Seedfinder
+  fields:
+    hours:
+      name: Hours
+      description: Minimum age of entries to clean from the cache. Default to 24 hours if not set
+      example: 6
+      required: false
+      selector:
+        number:
+          mode: box
+          unit_of_measurement: hours
+          min: 0
+          max: 24
+=======
+search:
+  name: Search
+  description: Searches Seedfinder for a plant
+  fields:
+    alias:
+      name: Search for
+      description: The string to search for
+      example: Capsicum
+      required: true
+      selector:
+        text:
+
+get:
+  name: Get
+  description: Fetches data for a specific strain from a specific breeder
+  fields:
+    species:
+      name: Strain Name
+      description: The name of the strain/species
+      example: white-widow
+      required: true
+      selector:
+        text:
+    breeder:
+      name: Breeder Name
+      description: The name of the breeder
+      example: greenhouse-seed-co
+      required: true
+      selector:
+        text:
+
+clean_cache:
+  name: Clean Cache
+  description: Clean up the cached entries from Seedfinder
+  fields:
+    hours:
+      name: Hours
+      description: Minimum age of entries to clean from the cache. Default to 24 hours if not set
+      example: 6
+      required: false
+      selector:
+        number:
+          mode: box
+          unit_of_measurement: hours
+          min: 0
+          max: 24
+>>>>>>> 20ef10369a6658372551f99584af4cec6c5ced1f

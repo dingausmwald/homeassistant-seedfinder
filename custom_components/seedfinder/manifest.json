@@ -1,0 +1,25 @@
+{
+  "domain": "seedfinder",
+  "name": "Seedfinder",
+  "codeowners": [
+    "@dingausmwald"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "history",
+    "recorder"
+  ],
+  "documentation": "https://github.com/dingausmwald/home-assistant-seedfinder/",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/dingausmwald/home-assistant-seedfinder/issues",
+  "loggers": [
+    "seedfinder_sdk"
+  ],
+  "requirements": [
+    "json-timeseries==0.1.7",
+    "beautifulsoup4>=4.9.3",
+    "aiohttp>=3.8.1",
+    "selenium==4.17.2"
+  ],
+  "version": "1.3.0"
+}
