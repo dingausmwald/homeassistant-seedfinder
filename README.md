@@ -1,117 +1,86 @@
-# Seedfinder integration for Home Assistant
+# Seedfinder Integration for Home Assistant
 
-This integration allows fetching plants information from Seedfinder.
-It creates a few service calls in Home Assistant to interact with cannabis seedfinder website which
-are:
+**Cannabis strain data provider for Home Assistant - Part of the Brokkoli Suite**
 
-* Get plant details
+A Home Assistant integration that fetches cannabis strain information from Seedfinder. Provides online strain data for the [Brokkoli Cannabis Management](https://github.com/dingausmwald/homeassistant-brokkoli) integration.
 
-This is used as a base for the sister-integration https://github.com/dingausmwald/homeassistant-brokkoli
+## 🌱 Features
 
-## Installation
+- Cannabis strain data fetching from Seedfinder database
+- Automatic image download and local hosting
+- Service calls for strain information retrieval
+- Cache management for performance optimization
+
+## 🔧 Installation
+
+### HACS Installation (Recommended)
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
-This can be installed manually or through HACS
-
-### Via HACS
-
-* Add this repo as a "Custom repository" with type "Integration"
-    * Click HACS in your Home Assistant
-    * Click Integrations
-    * Click the 3 dots in the top right corner and select "Custom Repositories"
-    * Add the URL to this GitHub repository and category "Integration"
-* Click "Install" in the new "Seedfinder" card in HACS.
-* Wait for install to complete
-* Restart Home Assistant
+1. Add this repository as a Custom Repository in HACS
+2. Set the category to "Integration"
+3. Click "Install" on the "Seedfinder" card
+4. Restart Home Assistant
 
 ### Manual Installation
 
-* Copy the whole`custom_components/seedfinder/` directory to your server's `<config>/custom_components` directory
-* Restart Home Assistant
+1. Copy the `custom_components/seedfinder/` directory to your `<config>/custom_components/` directory
+2. Restart Home Assistant
 
-## Set up
+## 🚀 Setup
 
-The integration is set up using the GUI.
+1. Go to **Settings** → **Devices & Services** → **Add Integration**
+2. Search for "Seedfinder" and select it
+3. Configure image download path (optional)
 
-Go to "Settings" -> "Integrations" in Home Assistant. Click "Add integration" and find "Seedfinder" in the list.
+## 📊 Configuration
 
-## Configuration
+### Image Download
+- Default path: `/config/www/images/plants`
+- Images in `www/` directory are accessible via `/local/` URLs
+- Existing files are never overwritten
+- Path must exist before configuration
 
-The integration provide the following configuration options:
+## 📱 Available Services
 
-![image](./images/config-options.png)
-
-### Automatically download images from Seedfinder.
-
-The default path to save the images is `/config/www/images/plants`, but it can be set to any directory you wish.
-
-You need to specify an _existing path_ that the user you are running home assistant as has write access to. If you
-specify a relative path (e.g. a path that does not start with a "/", it means a path below your "config" directory. So "
-www/images/plants" will mean "&lt;home-assistant-install-directory&gt;/config/www/images/plants".
-
-If the path contains **"www/"** the image_url in plant attributes will also be replaced by a reference to
-/local/<path to image>. So if the download path is set to the default "/config/www/images/plants/", the "image_url" of
-the species will be replaced with "/local/images/plants/my plant species.jpg".
-
-If the path does _not_ contain **"www/"** the full link to the image in Seedfinder is kept as it is, but the image is
-still downloaded to the path you specify.
-
-Existing files will never be overwritten, and the path needs to exist before the integration is configured.
-
-## Examples
-
-Service calls are added by this integration:
-
-### seedfinder.clean_cache
-
-`seedfinder.clean_cache` can be used to manually trigger cleaning of the cache. This service takes an optional parameter, 'hours', which defaults to 24 if not specified.
-
-```yaml
-service: seedfinder.clean_cache
-```
-
-### seedfinder.get
-
-`seedfinder.get` gets detailed data for a single plant. The result is added to the
-entity `seedfinder.<species name>` with parameters for different max/min values set as attributes.
+### `seedfinder.get`
+Fetch detailed strain information:
 
 ```yaml
 service: seedfinder.get
 service_data:
-  species: white-widow
-  breeder: greenhouse-seed-co
+  species: White Widow
+  breeder: Dutch Passion
 ```
 
-And the results can be found in `seedfinder.white_widow`:
+Results are stored in `seedfinder.white_widow` entity with strain data as attributes.
 
-```jinja2
-Details for plant {{ states('seedfinder.white_widow') }}
-* Breeder: {{ state_attr('seedfinder.white_widow', 'breeder') }}
-* Image: {{ state_attr('seedfinder.white_widow', 'image_url') }}
+### `seedfinder.clean_cache`
+Clear cached strain data:
+
+```yaml
+service: seedfinder.clean_cache
+data:
+  hours: 24  # optional, defaults to 24
 ```
 
-Which gives
+## 🎨 Brokkoli Suite Integration
 
-Details for plant White Widow
+This integration is part of the Brokkoli Suite for cannabis cultivation tracking:
 
-* Breeder: Greenhouse Seed Co.
-* Effects: ...
-* Image: https://.../white-widow.jpg
+- **[Brokkoli Cannabis Management](https://github.com/dingausmwald/homeassistant-brokkoli)** - Main cannabis monitoring integration
+- **[Brokkoli Card](https://github.com/dingausmwald/lovelace-brokkoli-card)** - Lovelace cards for cannabis visualization
 
-### Quick UI example
+## 🤝 Contributing
 
-Just to show how the service calls can be utilized to search the Seedfinder API
+Contributions are welcome! Please submit pull requests or report issues.
 
-![Example](images/openplantbook.gif)
+## 📄 License
 
-**PS!**
+This project is licensed under the MIT License.
 
-This UI is _not_ part of the integration. It is just an example of how to use the service calls.
-
-An explanation of the UI is available
-here: https://github.com/dingausmwald/home-assistant-seedfinder/blob/main/examples/GUI.md
+## ☕ Support
 
 <a href="https://www.buymeacoffee.com/dingausmwald" target="_blank">
-<img src="https://user-images.githubusercontent.com/203184/184674974-db7b9e53-8c5a-40a0-bf71-c01311b36b0a.png" style="height: 50px !important;"> 
+<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;">
 </a>
